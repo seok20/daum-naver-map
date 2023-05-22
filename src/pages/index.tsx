@@ -5,11 +5,14 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <Link href={"/naver-map"}>
+      <Link href={"/naver-map/page"}>
         <button>NAVER MAP</button>
       </Link>
-      <Link href={"/daum-location"}>
+      <Link href={"/daum-location/page"}>
         <button>DAUM LOCATION</button>
+      </Link>
+      <Link href={"/react-naver-maps/naverMap"}>
+        <button>REACT NAVER MAP</button>
       </Link>
     </div>
   );

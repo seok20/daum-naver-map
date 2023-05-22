@@ -1,5 +1,3 @@
-"use client";
-
 import useMap from "./useMap";
 
 const NaverMap = () => {
