@@ -14,27 +14,10 @@ const MyMap = () => {
   const mapRef = useRef<any | null>(null);
   const [map, setMap] = useState(null);
   const [rect, setRect] = useState(null);
+  const [showMarker, setShowMarker] = useState(false);
 
-  const locationHandleClick = () => {
-    if (map) {
-      //   const bounds = mapRef.current.instance.bounds();
-      //   const northEast = bounds.getNE();
-      //   const southWest = bounds.getSW();
-
-      //   console.log("북동쪽 좌표: ", northEast);
-      //   console.log("남서쪽 좌표 : ", southWest);
-
-      const bounds = map.getBounds();
-      const northEast = bounds.getNE();
-      const southWest = bounds.getSW();
-
-      console.log(bounds);
-      console.log(northEast);
-      console.log(southWest);
-    } else {
-      console.log("지도가 아직 로드되지 않았습니다.");
-    }
-  };
+  let NEMarkerPositon = { lat: 37.3340511, lng: 127.0903572 };
+  let SWMarkerPositon = { lat: 37.3545218, lng: 127.1194538 };
 
   const zoomHandleClick = () => {
     if (map) {
@@ -45,6 +28,17 @@ const MyMap = () => {
       if (map && rect) {
         rect.setBounds(bounds);
       }
+      console.log(southWest._lat, southWest._lng);
+      console.log(northEast._lat, northEast._lng);
+      NEMarkerPositon = {
+        lat: parseInt(northEast._lat),
+        lng: parseInt(northEast._lng),
+      };
+      SWMarkerPositon = {
+        lat: parseInt(southWest._lat),
+        lng: parseInt(southWest._lng),
+      };
+      setShowMarker(true);
     }
   };
   return (
@@ -67,13 +61,12 @@ const MyMap = () => {
             fillOpacity={0.2}
             fillColor={"#f00"}
           ></Rectangle>
-          <Marker
-            defaultPosition={new navermaps.LatLng(37.3595704, 127.105399)}
-          />
+          <Marker defaultPosition={NEMarkerPositon} />
+          <Marker defaultPosition={SWMarkerPositon} />
         </NaverMap>
       </MapDiv>
-      <button onClick={locationHandleClick}>현재 위치 재검색</button>
-      <button onClick={zoomHandleClick}>줌 핸들러</button>
+
+      <button onClick={zoomHandleClick}>현재 위치 재검색</button>
     </div>
   );
 };
